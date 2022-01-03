@@ -1,0 +1,27 @@
+Projeto Agência de Viangens JLK
+
+Modulo 3 - Recode Pro
+Aluno: John Michael
+Squad: 41
+
+Login e Senha: 
+
+john-fullstack = 2128
+gabriel-mentor = 1234
+kecya-rh = 2821
+
+=> APP ASP NET MVC
+=> Script
+=> Modelagem de Dados
+
+Link do Repositório Asp Net: https://github.com/JohnMichaelDeveloper/AgenciaDeViagensJLK.git
+
+
+=> Site Html e CSS
+Link de Visualização:https://johnmichaeldeveloper.github.io/site_agenciadeviagens_jlk/
+Link do Repositório:https://github.com/JohnMichaelDeveloper/site_agenciadeviagens_jlk.git
+
+
+
+
+

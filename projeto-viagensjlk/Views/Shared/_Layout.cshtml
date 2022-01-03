@@ -1,0 +1,192 @@
+﻿@using Microsoft.AspNetCore.Http;
+<!DOCTYPE html>
+<html lang="PT-BR">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Site Agência de viagens JLK">
+    <meta name="author" content="John Michael">
+    <title>@ViewData["Title"] - Agência de Viagens</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/estilo.css" />
+    <link rel="stylesheet" href="~/css/estilos.css" />
+    <link rel="icon" type="image/png" href="https://media.discordapp.net/attachments/871853660706058323/925117445226766406/icone.png?width=398&height=397">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Amiko:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Amiko:wght@400;600;700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+</head>
+<body style="background-color: #ECF0F1 !important;">
+    <header>
+        <nav class="nav-bar" style="background-color: #ffc107 !important;">
+            <div>
+                <a asp-action="Index"><img src="https://media.discordapp.net/attachments/871853660706058323/925117445776228352/logo-branco.png" alt="Logo" title="Viagens JLK" class="logo" style="width: auto; height: 50px;"></a>
+            </div>
+            <div class="right-items">
+                <div class="login-text">
+
+                    @if (Context.Session.GetInt32("id_tipoUse") == null)
+                    {
+
+                        <div class="menu-hamburger">
+                            <button id="button-hamburger"><img alt="Menu Hamburger" title="Menu" src="~/img/icone-hamburger.png" class="icones-img"></button>
+                            <ul style="background-color: #ffc107 !important;">
+
+                                <li><a asp-action="Index">Home</a></li>
+                                <li><a asp-action="Pacotes">Pacotes</a></li>
+                                <li><a asp-action="Atendimento">Atendimento</a></li>
+                                <li><a asp-action="Cadastro">Cadastro</a></li>
+                                <li><a asp-action="loginUse">Login</a></li>
+                            </ul>
+                        </div>
+
+                    }
+
+
+
+                    @if (Context.Session.GetInt32("id_tipoUse") != null)
+                    {
+                        @if (Context.Session.GetString("contaUse") == "usuario")
+                        {
+                            ViewBag.Login = @Context.Session.GetString("nomeUse");
+
+                            <a asp-action="Logout"><h4 class="d-none d-lg-block" asp-action="Logout" title="Logout" style="color: white; font-size: 1.5rem; margin-right: 5em; margin-top: 0.5em; ">Olá, @Context.Session.GetString("nomeUse")!</h4><img class="icones-img  d-sm-none" asp-action="Logout" title="Logout" src="~/img/icone-logout.png" id="logo2" style="position:absolute; right:110px;  top: 29px;"></a>
+                            <span style="font-family:'Poppins', sans-serif; color: white; position:absolute; right:120px;  top: 25px; font-size: 15px;">@ViewBag.loginUse</span>
+                            <div class="menu-hamburger">
+                                <button id="button-hamburger"><img alt="Menu Hamburger" title="Menu" src="~/img/icone-hamburger.png" class="icones-img"></button>
+                                <ul style="background-color: #ffc107 !important;">
+
+                                    <li><a asp-action="Index">Home</a></li>
+                                    <li><a asp-action="Pacotes">Pacotes</a></li>
+                                    <li><a asp-action="Registro_Pacotes" class="d-none">Registrar Pacotes</a></li>
+                                    <li><a asp-action="Listar_Usuarios" class="d-none">Lista de Usuários</a></li>
+                                    <li><a asp-action="Listar_Pacotes" class="d-none">Lista de Pacotes </a></li>
+                                    <li><a asp-action="Atendimento">Atendimento</a></li>
+                                    <li><a asp-action="Cadastro" class="d-none">Cadastro</a></li>
+                                    <li><a asp-action="Logout">Logout</a></li>
+
+                                </ul>
+                            </div>
+                        }
+                        @if (Context.Session.GetString("contaUse") == "colaborador")
+                        {
+                            <a asp-action="Logout"><h4 class="d-none d-lg-block" asp-action="Logout" title="Logout" style="color: white; font-size: 1.5rem; margin-right: 5em; margin-top: 0.5em; "> Olá, colaborador @Context.Session.GetString("nomeUse")!</h4><img class="icones-img  d-sm-none" asp-action="Logout" title="Logout" src="~/img/icone-logout.png" id="logo2" style="position:absolute; right:110px;  top: 29px;"></a>
+                            <span style="font-family:'Poppins', sans-serif; color: white; position:absolute; right:120px;  top: 25px; font-size: 15px;">@ViewBag.loginUse</span>
+                            <div class="menu-hamburger">
+                                <button id="button-hamburger"><img alt="Menu Hamburger" title="Menu" src="~/img/icone-hamburger.png" class="icones-img"></button>
+                                <ul style="background-color: #ffc107 !important;">
+
+                                    <li><a asp-action="Index">Home</a></li>
+                                    <li><a asp-action="Pacotes">Pacotes</a></li>
+                                    <li><a asp-action="Registro_Pacotes">Registrar Pacotes</a></li>
+                                    <li><a asp-action="Listar_Usuarios">Lista de Usuários</a></li>
+                                    <li><a asp-action="Listar_Pacotes">Lista de Pacotes </a></li>
+                                    <li><a asp-action="Atendimento" class="d-none">Atendimento</a></li>
+                                    <li><a asp-action="Cadastro">Cadastro</a></li>
+                                    <li><a asp-action="Logout">Logout</a></li>
+
+                                </ul>
+                            </div>
+
+
+
+                        }
+                        @if (Context.Session.GetString("contaUse") == "administrador")
+                        {
+                            <a asp-action="Logout"><h4 class="d-none d-lg-block" asp-action="Logout" title="Logout" style="color: white; font-size: 1.5rem; margin-right: 5em; margin-top: 0.5em; ">Olá, administrador @Context.Session.GetString("nomeUse")!</h4><img class="icones-img  d-sm-none" asp-action="Logout" title="Logout" src="~/img/icone-logout.png" id="logo2" style="position:absolute; right:110px;  top: 29px;"></a>
+                            <span style="font-family:'Poppins', sans-serif; color: white; position:absolute; right:120px;  top: 25px; font-size: 15px;">@ViewBag.loginUse</span>
+                            <div class="menu-hamburger">
+                                <button id="button-hamburger"><img alt="Menu Hamburger" title="Menu" src="~/img/icone-hamburger.png" class="icones-img"></button>
+                                <ul style="background-color: #ffc107 !important;">
+
+                                    <li><a asp-action="Index">Home</a></li>
+                                    <li><a asp-action="Pacotes">Pacotes</a></li>
+                                    <li><a asp-action="Registro_Pacotes">Registrar Pacotes</a></li>
+                                    <li><a asp-action="Listar_Usuarios">Lista de Usuários</a></li>
+                                    <li><a asp-action="Listar_Pacotes">Lista de Pacotes </a></li>
+                                    <li><a asp-action="Atendimento" class="d-none">Atendimento</a></li>
+                                    <li><a asp-action="Cadastro">Cadastro</a></li>
+                                    <li><a asp-action="Logout">Logout</a></li>
+
+                                </ul>
+                            </div>
+
+                        }
+                    }
+
+
+
+
+
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div>
+        <main>
+            @RenderBody()
+        </main>
+    </div>
+    <div>
+
+
+
+
+        @if (ViewBag.Title == "Pacotes")@* "Cadastro" || "Login" || "Registro de Pacotes"*@
+        {
+            <footer class="footer navbar-fixed-bottom" style="background-color: #ffc107 !important; text-shadow: 2px 2px 8px #000000 !important; ">
+                <p>Aluno Recode Pro - John Michael -  &copy; @DateTime.Now.Year </p>
+            </footer>
+        }
+        @if (ViewBag.Title == "Home")
+        {
+            <footer class="footer navbar-fixed-bottom" style="background-color: #ffc107 !important; text-shadow: 2px 2px 8px #000000 !important; ">
+                <p>Aluno Recode Pro - John Michael -  &copy; @DateTime.Now.Year </p>
+            </footer>
+        }
+        @if (ViewBag.Title == "Cadastro")
+        {
+            <footer class="footer navbar-fixed-bottom" style="background-color: #ffc107 !important; text-shadow: 2px 2px 8px #000000 !important; ">
+                <p>Aluno Recode Pro - John Michael -  &copy; @DateTime.Now.Year </p>
+            </footer>
+        }
+        @if (ViewBag.Title == "Login")
+        {
+            <footer class="footer navbar-fixed-bottom" style="background-color: #ffc107 !important; text-shadow: 2px 2px 8px #000000 !important; ">
+                <p>Aluno Recode Pro - John Michael -  &copy; @DateTime.Now.Year </p>
+            </footer>
+        }
+        @if (ViewBag.Title == "Registro de Pacotes")
+        {
+            <footer class="footer navbar-fixed-bottom" style="background-color: #ffc107 !important; text-shadow: 2px 2px 8px #000000 !important; ">
+                <p>Aluno Recode Pro - John Michael -  &copy; @DateTime.Now.Year </p>
+            </footer>
+        }
+        @if (ViewBag.Title == "Listagem de Pacotes")
+        {
+            <br />
+            <br />
+            <br />
+            <footer class="footer navbar-fixed-bottom mt-5" style="background-color: #ffc107 !important; text-shadow: 2px 2px 8px #000000 !important; ">
+                <p>Aluno Recode Pro - John Michael -  &copy; @DateTime.Now.Year </p>
+            </footer>
+        }
+
+        @if (ViewBag.Title == "Listagem de Usuários")
+        {
+            <footer class="footer navbar-fixed-bottom mt-5" style="background-color: #ffc107 !important; text-shadow: 2px 2px 8px #000000 !important; ">
+                <p>Aluno Recode Pro - John Michael -  &copy; @DateTime.Now.Year </p>
+            </footer>
+        }
+
+    </div>
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

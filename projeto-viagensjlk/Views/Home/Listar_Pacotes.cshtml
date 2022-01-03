@@ -1,0 +1,53 @@
+@using Microsoft.AspNetCore.Http;
+@model IEnumerable<Pacotes>
+@{
+    ViewData["Title"] = "Listagem de Pacotes";
+}
+<main class="fundo-color mb-5" style="min-height: 100vh;">
+<div class="usuarios-content ">  
+<div class="mb-5 p-2">
+    <div class="icone-titulo"><img class="icones-content" src="~/img/icone-listagempacotes.png"><h3 class="titulos">LISTAGEM DE PACOTES</h3></div>
+<p class="paragrafos">A lista com todos os pacotes cadastrados no sistema será exibida abaixo. Utilize os botões da direita para realizar a exclusão ou alteração dos pacotes</p>
+<p class="paragrafos">AVISO: Só o administrador podera fazer a exclusão de um pacote ou alteração. Uma vez excluídos, os dados do registo relacionados ao pacote não poderão ser recuperados.</p>
+<table class="table mb-4">
+  <thead class="thead-dark">
+    <tr>
+      <th scioe="col">ID</th>
+      <th scope="col">NOME</th>
+      <th scope="col">ORIGEM</th>
+      <th scope="col">DESTINO</th>
+      <th scope="col">DATA DE SAÍDA</th>
+      <th scope="col">DATA DE RETORNO</th>
+      <th scope="col">PREÇO</th> 
+      <th scope="col"></th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+
+    </tr>
+  </thead>
+  <tbody class="mb-5" >
+     @foreach(Pacotes p in Model)
+     {
+        <tr>
+          <th scope="row">@p.id</th>
+          <td>@p.nome</td>
+          <td>@p.origem</td>
+          <td>@p.destino</td>
+          <td>@p.saida</td>
+          <td>@p.retorno</td>
+          <td>@p.preco</td>
+             @if (Context.Session.GetString("contaUse") == "administrador")
+             {
+                  <td><a href="/Home/Alterar_Pacote?id=@p.id"><img class="icones-content" src="~/img/icone-edit.png"></a></td>
+                  <td><a href="/Home/Excluir_Pacote?id=@p.id"><img class="icones-content" src="~/img/icone-close2.png"></a></td>
+             }
+        </tr>
+    } 
+  </tbody>
+</table>
+
+</div>
+ </div>
+</main>
+<br />
+<br />

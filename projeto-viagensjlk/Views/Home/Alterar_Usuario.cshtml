@@ -1,0 +1,39 @@
+@using Microsoft.AspNetCore.Http;
+@model TipoUse
+
+@{
+    ViewData["Title"] = "Alteração de Usuário";
+}
+
+<main class="fundo-color" style="min-height: 100vh;">
+
+    
+    <div class="cadastro-content d-flex justify-content-around">  
+    <div>
+        <div class="icone-titulo"><img class="icones-content" src="~/img/icone-user.png"><h3 class="titulos">ALTERAÇÃO DE DADOS DO USUÁRIO</h3></div>
+    <form class="form-style" action="Alterar_Usuario" method="POST">
+    <label class="label-style" asp-for="nomeUse">Nome:</label>    
+    <input class="input-style" asp-for="nomeUse" name="nomeUse" value="@Model.nomeUse" required>
+    <label class="label-style" asp-for="data_nasc">Data de nascimento:</label>    
+    <input class="input-style" asp-for="data_nasc" name="data_nasc" value="@Model.data_nasc" required maxlength="10">
+    <label class="label-style" asp-for="loginUse">Login:</label>    
+    <input class="input-style" asp-for="loginUse" name="loginUse" value="@Model.loginUse" required>
+    <label class="label-style" asp-for="senhaUse">Senha:</label> 
+    <input class="input-style" asp-for="senhaUse" type="password" value="@Model.senhaUse" name="senhaUse" required>
+    <input class="input-style" type="hidden" asp-for="id_tipoUse" name="id_tipoUse" value="@Model.id_tipoUse" required>   
+    
+    <input type="submit" value="Alterar" class="input-button">
+    </form>
+
+</div>
+
+    <div class="bloco-texto paragrafos">
+        <h3 class="titulos">DADOS DO USUÁRIO</h3>
+        <p>Modifique os dados do usuário ao lado apagando os antigos e inserindo os novos.</p>
+        <p>Após conferir se está tudo correto, use o botão "Alterar" para concluir a alteração.</p>
+    </div>
+
+</div>
+
+
+</main>
